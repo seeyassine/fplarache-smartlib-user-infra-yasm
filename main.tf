@@ -5,3 +5,8 @@ provider "aws" {
 resource "aws_ecr_repository" "app_repo" {
   name = "dev-fplarache-smartlib-users-repo-yasm"
 }
+
+resource "aws_ecs_cluster" "app_cluster" {
+  name = "dev-fplarache-smartlib-users-fgcluster-yasm"
+}
+
