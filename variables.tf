@@ -28,3 +28,11 @@ variable "ecs_task_family" {
   description = "Family name for the ECS task definition"
   default     = "dev-fplarache-smartlib-users-td-yasm"
 }
+
+
+# Nom du service ECS
+
+variable "ecs_service" {
+  description = "Name of the ECS service"
+  default     = "dev-fplarache-smartlib-users-fgservice-yasm"
+}
