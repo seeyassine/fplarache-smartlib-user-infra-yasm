@@ -36,3 +36,11 @@ variable "ecs_service" {
   description = "Name of the ECS service"
   default     = "dev-fplarache-smartlib-users-fgservice-yasm"
 }
+
+# Subnet IDs pour ECS
+
+variable "subnet_ids" {
+  description = "List of subnet IDs for the ECS service"
+  type        = list(string)
+  default     = ["subnet-0cf9e8ccfb6fd0f77", "subnet-05fac6b2678b41a37" , "subnet-00d967507df4b0bfb"] 
+}
