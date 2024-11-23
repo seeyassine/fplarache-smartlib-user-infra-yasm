@@ -20,3 +20,11 @@ variable "ecs_cluster" {
   description = "Name of the ECS cluster"
   default     = "dev-fplarache-smartlib-users-fgcluster-yasm"
 }
+
+
+# Nom de la famille de la tâche ECS
+
+variable "ecs_task_family" {
+  description = "Family name for the ECS task definition"
+  default     = "dev-fplarache-smartlib-users-td-yasm"
+}
