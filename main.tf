@@ -21,7 +21,7 @@ resource "aws_ecs_cluster" "dev-fplarache-smartlib-users-fgcluster-yasm" {
 
 resource "aws_ecs_task_definition" "dev-fplarache-smartlib-users-td-yasm" {
   family                = "dev-fplarache-smartlib-users-td-yasm"
-  execution_role_arn    = aws_iam_role.ecs_task_execution_role.arn
+  execution_role_arn    = aws_iam_role.ecs_task_execution_role.arn     //Associer le rôle IAM à votre définition de tâche ECS
   container_definitions = jsonencode([{
     name  = "dev-fplarache-smartlib-user-yasm-container"
     image = aws_ecr_repository.dev-fplarache-smartlib-users-repo-yasm.repository_url
@@ -67,7 +67,7 @@ resource "aws_iam_policy_attachment" "ecs_task_execution_policy_attachment" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
-//
+
 
 
 
