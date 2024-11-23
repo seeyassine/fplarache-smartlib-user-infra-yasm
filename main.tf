@@ -2,25 +2,25 @@
 //le provider AWS 
 
 provider "aws" {
-  region = "eu-north-1"
+  region = var.aws_region
 }
 
 // repository ECR
 
 resource "aws_ecr_repository" "dev-fplarache-smartlib-users-repo-yasm" {
-  name = "dev-fplarache-smartlib-users-repo-yasm"
+    name = var.ecr_repo
 }
 
 //cluster ECS
 
 resource "aws_ecs_cluster" "dev-fplarache-smartlib-users-fgcluster-yasm" {
-  name = "dev-fplarache-smartlib-users-fgcluster-yasm"
+  name = var.ecs_cluster
 }
 
 // définition de tâche ECS
 
 resource "aws_ecs_task_definition" "dev-fplarache-smartlib-users-td-yasm" {
-  family                = "dev-fplarache-smartlib-users-td-yasm"
+   family                = var.ecs_task_family
   execution_role_arn    = aws_iam_role.ecs_task_execution_role.arn     //Associer le rôle IAM à votre définition de tâche ECS
   container_definitions = jsonencode([{
     name  = "dev-fplarache-smartlib-user-yasm-container"
@@ -37,6 +37,9 @@ resource "aws_ecs_service" "dev-fplarache-smartlib-users-fgservice-yasm" {
   cluster        = aws_ecs_cluster.dev-fplarache-smartlib-users-fgcluster-yasm.id
   task_definition = aws_ecs_task_definition.dev-fplarache-smartlib-users-td-yasm.arn
   desired_count  = 1
+  network_configuration {
+    subnets = var.subnet_ids
+  }
 }
 
 
