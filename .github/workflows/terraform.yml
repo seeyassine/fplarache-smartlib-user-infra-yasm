@@ -1,10 +1,9 @@
-name: Deploy 
+name: Deploy Terraform
 
 on:
-  workflow_dispatch
-  #push:
-   # branches:
-    #  - main
+  push:
+    branches:
+      - main
 
 jobs:
   terraform:
@@ -21,27 +20,27 @@ jobs:
       with:
         terraform_version: 1.5.0 # Specify the desired Terraform version.
     
-    # Step 3: Terraform Init
+    # Step 3: Configure AWS Credentials
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v3
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: "eu-north-1"
+
+    # Step 4: Terraform Init
     - name: Terraform Init
       run: terraform init
-
-    # Étape 4 : Configurer les identifiants AWS
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v3
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: "eu-north-1"
 
     # Step 5: Terraform Plan
     - name: Terraform Plan
       run: terraform plan
-      #env:
-        #TF_VAR_environment: dev # Example variable, adjust as necessary
+      env:
+        TF_VAR_environment: dev # Example variable, adjust as necessary
 
     # Step 6: Terraform Apply
     - name: Terraform Apply
-      if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' # Conditional execution
+      if: github.ref == 'refs/heads/main' # Apply only when pushed to main
       run: terraform apply -auto-approve
-      #env:
-       # TF_VAR_environment: dev # Example variable, adjust as necessary
+      env:
+        TF_VAR_environment: dev # Example variable, adjust as necessary
