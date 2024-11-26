@@ -50,6 +50,6 @@ variable "environment" {
   default     = "dev"
   validation {
       condition     = can(regex("^[a-zA-Z0-9_./=+-:@]*$", var.environment))
-      error_message = "Environment must only contain valid characters for AWS tags."
+      error_message = "Environment must only contain valid characters for AWS tags.."
     }
 }
