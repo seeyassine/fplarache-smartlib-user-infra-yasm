@@ -10,15 +10,27 @@ provider "aws" {
 resource "aws_ecr_repository" "users-repo-yasm" {
     name = var.ecr_repo
     image_tag_mutability = "MUTABLE"
+
+    tags = {
+        ENV     = var.environment
+        Project = "fplarache-smartlib-user"
+        Owner   = "YASSINE AIT SI M'BAREK"
+      }
 }
 
 #cluster ECS
 
 resource "aws_ecs_cluster" "users-cluster-yasm" {
   name = var.ecs_cluster
+
+  tags = {
+          ENV     = var.environment
+          Project = "fplarache-smartlib-user"
+          Owner   = "YASSINE AIT SI M'BAREK"
+        }
 }
 
- #définition de tâche ECS - la task definition ECS
+ #définition de tâche ECS -  task definition ECS
 
 resource "aws_ecs_task_definition" "users-taskd-yasm" {
     family = var.ecs_task_family
@@ -55,6 +67,12 @@ resource "aws_ecs_service" "users-fgservice-yasm" {
     subnets = var.subnet_ids
     assign_public_ip = true
   }
+
+  tags = {
+            ENV     = var.environment
+            Project = "fplarache-smartlib-user"
+            Owner   = "YASSINE AIT SI M'BAREK"
+          }
 }
 
 
@@ -75,6 +93,12 @@ resource "aws_iam_role" "ecs_task_execution_role" {
       }
     ]
   })
+
+  tags = {
+            ENV     = var.environment
+            Project = "fplarache-smartlib-user"
+            Owner   = "YASSINE AIT SI M'BAREK"
+          }
 }
 
 #l'ajoutez des politiques au rôle
