@@ -14,7 +14,7 @@ resource "aws_ecr_repository" "users-repo-yasm" {
     tags = {
         ENV     = var.environment
         Project = "fplarache-smartlib-user"
-        Owner   = "YASSINE AIT SI M'BAREK"
+        Owner   = "yassine ait si mbarek"
       }
 }
 
