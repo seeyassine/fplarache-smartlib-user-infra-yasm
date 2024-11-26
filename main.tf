@@ -26,7 +26,7 @@ resource "aws_ecs_cluster" "users-cluster-yasm" {
   tags = {
           ENV     = var.environment
           Project = "fplarache-smartlib-user"
-          Owner   = "YASSINE AIT SI M'BAREK"
+          Owner   = "YASSINE AIT SI MBAREK"
         }
 }
 
@@ -71,7 +71,7 @@ resource "aws_ecs_service" "users-fgservice-yasm" {
   tags = {
             ENV     = var.environment
             Project = "fplarache-smartlib-user"
-            Owner   = "YASSINE AIT SI M'BAREK"
+            Owner   = "YASSINE AIT SI MBAREK"
           }
 }
 
@@ -97,7 +97,7 @@ resource "aws_iam_role" "ecs_task_execution_role" {
   tags = {
             ENV     = var.environment
             Project = "fplarache-smartlib-user"
-            Owner   = "YASSINE AIT SI M'BAREK"
+            Owner   = "YASSINE AIT SI MBAREK"
           }
 }
 
